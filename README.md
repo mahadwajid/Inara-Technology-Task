@@ -18,6 +18,17 @@ A simple React app that shows a product store for customers and an admin dashboa
 - Formik + Yup
 - React Toastify
 
+ ## Libraries used and why
+ - React: core UI library for building components and managing state.
+ - React Router (react-router-dom): client-side routing for Store, Admin, and Product Detail pages.
+ - Tailwind CSS: utility-first styling for fast, consistent UI without writing custom CSS from scratch.
+ - Formik: simple form state management and submission handling in `ProductForm`.
+ - Yup: schema-based validation integrated with Formik for reliable form rules.
+ - React Toastify: non-blocking notifications for add/update/delete actions.
+ - uuid: generate stable unique IDs when needed (future-proofing, though IDs are currently computed).
+ - react-scripts: CRA build/dev tooling for zero-config setup.
+ - postcss & autoprefixer: Tailwind processing and vendor prefixing for cross-browser CSS support.
+
 ## Getting Started
 1. Open a terminal in the `frontend` folder
 2. Install dependencies:
