@@ -69,14 +69,15 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                 alt={product.name}
                 className="w-16 h-16 object-cover rounded-lg"
                 onError={(e) => {
-                  e.target.src = 'https://via.placeholder.com/64x64?text=No+Image';
+                  e.target.onerror = null;
+                  e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239ca3af" font-size="8">No Image</text></svg>';
                 }}
               />
               <div className="flex-1 min-w-0">
                 <h4 className="text-sm font-medium text-gray-900 truncate">
                   {product.name}
                 </h4>
-                <p className="text-sm text-gray-600">${product.price.toFixed(2)}</p>
+                <p className="text-sm text-gray-600">RS{product.price.toFixed(2)}</p>
                 <p className="text-xs text-gray-500">Stock: {product.stock}</p>
               </div>
               <div className="flex flex-col space-y-2">
@@ -129,7 +130,8 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                     alt={product.name}
                     className="w-16 h-16 object-cover rounded-lg"
                     onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/64x64?text=No+Image';
+                      e.target.onerror = null;
+                      e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239ca3af" font-size="8">No Image</text></svg>';
                     }}
                   />
                 </td>
@@ -142,7 +144,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  ${product.price.toFixed(2)}
+                  RS{product.price.toFixed(2)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${

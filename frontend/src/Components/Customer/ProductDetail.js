@@ -61,7 +61,8 @@ const ProductDetail = () => {
             alt={product.name}
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/600x600?text=No+Image';
+              e.target.onerror = null;
+              e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239ca3af" font-size="32">No Image</text></svg>';
             }}
           />
         </div>
@@ -74,7 +75,7 @@ const ProductDetail = () => {
             </h1>
             <div className="flex items-center space-x-4">
               <span className="text-3xl font-bold text-blue-600">
-                ${product.price.toFixed(2)}
+                RS{product.price.toFixed(2)}
               </span>
               <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                 product.stock > 10
@@ -143,7 +144,7 @@ const ProductDetail = () => {
           <div className="bg-gray-50 rounded-lg p-4">
             <h3 className="font-medium text-gray-900 mb-2">Product Information</h3>
             <ul className="text-sm text-gray-600 space-y-1">
-              <li>• Free shipping on orders over $100</li>
+              <li>• Free shipping on orders over RS100</li>
               <li>• 30-day return policy</li>
               <li>• 1-year manufacturer warranty</li>
               <li>• Customer support available 24/7</li>

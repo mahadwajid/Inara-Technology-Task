@@ -12,7 +12,7 @@ export const useProducts = () => {
       
       const newProduct = {
         ...productData,
-        id: nextId, // Simple ID generation 
+        id: nextId, 
         price: parseFloat(productData.price),
         stock: parseInt(productData.stock, 10),
       };

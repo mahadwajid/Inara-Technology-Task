@@ -19,7 +19,8 @@ const ProductCard = ({ product }) => {
           alt={product.name}
           className="w-full h-full object-cover"
           onError={(e) => {
-            e.target.src = 'https://via.placeholder.com/300x300?text=No+Image';
+            e.target.onerror = null;
+            e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><rect width="100%" height="100%" fill="%23e5e7eb"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%239ca3af" font-size="20">No Image</text></svg>';
           }}
         />
       </div>
@@ -35,7 +36,7 @@ const ProductCard = ({ product }) => {
         
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-blue-600">
-            ${product.price.toFixed(2)}
+            RS{product.price.toFixed(2)}
           </span>
           
           <div className="flex items-center space-x-2">

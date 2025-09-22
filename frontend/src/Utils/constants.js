@@ -82,7 +82,7 @@ export const SAMPLE_PRODUCTS = [
     name: 'Drone Camera',
     price: 499.99,
     stock: 5,
-    image: 'https://images.unsplash.com/photo-1508612761958-e931e1a1a8bf?w=400',
+    image: 'https://unsplash.com/photos/black-dji-mavi-drone-beside-controller-aidE5wrGwzQ',
     description: 'Compact drone with 4K camera and intelligent flight modes.'
   },
   {

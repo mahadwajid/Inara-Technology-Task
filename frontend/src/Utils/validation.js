@@ -9,7 +9,7 @@ export const productValidationSchema = Yup.object({
   price: Yup.number()
     .required('Price is required')
     .positive('Price must be greater than 0')
-    .min(0.01, 'Price must be at least $0.01'),
+    .min(0.01, 'Price must be at least RS0.01'),
   
   stock: Yup.number()
     .required('Stock is required')

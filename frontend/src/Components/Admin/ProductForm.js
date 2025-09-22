@@ -42,7 +42,7 @@ const ProductForm = ({ product, onSubmit, onCancel, isEditing = false }) => {
 
               <div>
                 <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
-                  Price ($) *
+                  Price (RS) *
                 </label>
                 <Field
                   type="number"
