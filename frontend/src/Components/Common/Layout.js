@@ -1,18 +1,15 @@
-function Layout({ children }) {
+import React from 'react';
+import Navbar from './Navbar';
+
+const Layout = ({ children }) => {
   return (
-    <div className="layout">    
-        <header className="header">     
-            <h1>My Application</h1>
-        </header>
-        <main className="main-content"> 
-
-            {children}
-
-        </main>
-        <footer className="footer">
-            <p>&copy; 2024 My Application</p>
-        </footer>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <main className="container mx-auto px-4 py-8">
+        {children}
+      </main>
     </div>
   );
-}       
+};
+
 export default Layout;
