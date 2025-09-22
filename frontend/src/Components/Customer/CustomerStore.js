@@ -1,11 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import ProductCard from './ProductCard';
 import { useProducts } from '../../Hooks/useProducts';
+import Pagination from '../Common/Pagination';
 
 const CustomerStore = () => {
   const { products } = useProducts();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
+  const [currentPage, setCurrentPage] = useState(1);
+  const PRODUCTS_PER_PAGE = 10;
 
   // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
@@ -32,6 +35,13 @@ const CustomerStore = () => {
 
     return filtered;
   }, [products, searchTerm, sortBy]);
+ 
+  // Pagination logic
+
+  const indexOfLastProduct = currentPage * PRODUCTS_PER_PAGE;
+  const indexOfFirstProduct = indexOfLastProduct - PRODUCTS_PER_PAGE;
+  const currentProducts = filteredAndSortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(filteredAndSortedProducts.length / PRODUCTS_PER_PAGE);
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -89,9 +99,9 @@ const CustomerStore = () => {
       </div>
 
       {/* Products Grid */}
-      {filteredAndSortedProducts.length > 0 ? (
+      {currentProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredAndSortedProducts.map((product) => (
+          {currentProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -119,6 +129,13 @@ const CustomerStore = () => {
           )}
         </div>
       )}
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
+
     </div>
   );
 };
