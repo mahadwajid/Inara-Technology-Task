@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import Pagination from '../Common/Pagination';
 import Modal from '../UI/Modal';
 import { PRODUCTS_PER_PAGE } from '../../Utils/constants';
+import { sanitizeHtml } from '../../Utils/sanitize';
 
 const ProductTable = ({ products, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -139,9 +140,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                   <div className="text-sm font-medium text-gray-900">
                     {product.name}
                   </div>
-                  <div className="text-sm text-gray-500 max-w-xs truncate">
-                    {product.description}
-                  </div>
+                  <div className="text-sm text-gray-500 max-w-xs truncate" dangerouslySetInnerHTML={{ __html: sanitizeHtml(product.description) }} />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   RS{product.price.toFixed(2)}

@@ -2,6 +2,8 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { productValidationSchema } from '../../Utils/validation';
 import { INITIAL_PRODUCT } from '../../Utils/constants';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const ProductForm = ({ product, onSubmit, onCancel, isEditing = false }) => {
   const initialValues = product || INITIAL_PRODUCT;
@@ -23,7 +25,7 @@ const ProductForm = ({ product, onSubmit, onCancel, isEditing = false }) => {
         }}
         enableReinitialize={true}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values, setFieldValue }) => (   // ✅ FIX: Destructure values + setFieldValue
           <Form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -86,17 +88,16 @@ const ProductForm = ({ product, onSubmit, onCancel, isEditing = false }) => {
               </div>
             </div>
 
+            {/* ✅ Rich Text Editor for Description */}
             <div>
               <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
                 Description *
               </label>
-              <Field
-                as="textarea"
+              <ReactQuill
                 id="description"
-                name="description"
-                rows="4"
-                className="input-field resize-none"
-                placeholder="Enter product description..."
+                value={values.description}
+                onChange={(content) => setFieldValue("description", content)}
+                className="bg-white rounded-md"
               />
               <ErrorMessage name="description" component="div" className="error-text" />
             </div>

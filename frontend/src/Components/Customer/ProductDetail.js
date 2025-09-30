@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../../Hooks/useProducts';
+import { sanitizeHtml } from '../../Utils/sanitize';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -93,9 +94,7 @@ const ProductDetail = () => {
             <h2 className="text-lg font-semibold text-gray-900 mb-3">
               Description
             </h2>
-            <p className="text-gray-700 leading-relaxed">
-              {product.description}
-            </p>
+            <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: sanitizeHtml(product.description) }} />
           </div>
 
           <div className="border-t pt-6">

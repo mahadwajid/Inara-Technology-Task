@@ -1,14 +1,20 @@
 import { useLocalStorage } from './useLocalStorage';
 import { STORAGE_KEYS, SAMPLE_PRODUCTS } from '../Utils/constants';
 import { toast } from 'react-toastify';
+import { useLoading } from '../Context/LoadingContext';
 
 export const useProducts = () => {
   const [products, setProducts] = useLocalStorage(STORAGE_KEYS.PRODUCTS, SAMPLE_PRODUCTS);
+  const { showLoader, hideLoader } = useLoading();
 
-  const addProduct = (productData) => {
+  const addProduct = async (productData) => {
     try {
+      showLoader();
 
-     const nextId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+      // Simulate async work
+      await new Promise(r => setTimeout(r, 500));
+
+      const nextId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
       
       const newProduct = {
         ...productData,
@@ -23,11 +29,15 @@ export const useProducts = () => {
     } catch (error) {
       toast.error('Failed to add product');
       console.error('Error adding product:', error);
+    } finally {
+      hideLoader();
     }
   };
 
-  const updateProduct = (id, productData) => {
+  const updateProduct = async (id, productData) => {
     try {
+      showLoader();
+      await new Promise(r => setTimeout(r, 500));
       const updatedProduct = {
         ...productData,
         id,
@@ -45,16 +55,22 @@ export const useProducts = () => {
     } catch (error) {
       toast.error('Failed to update product');
       console.error('Error updating product:', error);
+    } finally {
+      hideLoader();
     }
   };
 
-  const deleteProduct = (id) => {
+  const deleteProduct = async (id) => {
     try {
+      showLoader();
+      await new Promise(r => setTimeout(r, 500));
       setProducts(prev => prev.filter(product => product.id !== id));
       toast.success('Product deleted successfully!');
     } catch (error) {
       toast.error('Failed to delete product');
       console.error('Error deleting product:', error);
+    } finally {
+      hideLoader();
     }
   };
 

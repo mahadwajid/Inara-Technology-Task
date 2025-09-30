@@ -3,6 +3,12 @@ import * as Yup from 'yup';
 export const productValidationSchema = Yup.object({
   name: Yup.string()
     .required('Product name is required')
+    .matches(/^[A-Za-z0-9 ]+$/, "Only letters, numbers, and spaces are allowed")
+    .test("not-only-spaces", "Name cannot be empty or just spaces", (value) =>
+      value && value.trim().length > 0
+    )
+    // must contain at least one letter
+    .matches(/[A-Za-z]/, "Name must contain at least one letter")
     .min(2, 'Name must be at least 2 characters')
     .max(100, 'Name must be less than 100 characters'),
   
@@ -21,7 +27,14 @@ export const productValidationSchema = Yup.object({
     .url('Please enter a valid URL'),
   
   description: Yup.string()
-    .required('Description is required')
-    .min(10, 'Description must be at least 10 characters')
-    .max(500, 'Description must be less than 500 characters'),
+  .trim() // removes leading/trailing spaces before validation
+  .required('Description is required')
+  .test(
+    "not-only-spaces",
+    "Description cannot be only spaces",
+    (value) => value && value.trim().length > 0
+  )
+  .min(10, 'Description must be at least 10 characters')
+  .max(500, 'Description must be less than 500 characters'),
+
 });

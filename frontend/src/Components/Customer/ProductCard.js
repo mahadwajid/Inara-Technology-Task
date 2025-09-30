@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { sanitizeHtml } from '../../Utils/sanitize';
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -30,9 +31,7 @@ const ProductCard = ({ product }) => {
           {product.name}
         </h3>
         
-        <p className="text-gray-600 text-sm line-clamp-2">
-          {product.description}
-        </p>
+        <p className="text-gray-600 text-sm line-clamp-2" dangerouslySetInnerHTML={{ __html: sanitizeHtml(product.description) }} />
         
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-blue-600">
