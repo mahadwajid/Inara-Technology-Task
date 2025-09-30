@@ -1,5 +1,15 @@
 import * as Yup from 'yup';
 
+// Extract plain text from potential HTML (e.g., from ReactQuill) and collapse whitespace
+const extractPlainText = (value) => {
+  if (typeof value !== 'string') return '';
+  return value
+    .replace(/<[^>]*>/g, ' ')      // remove HTML tags
+    .replace(/&nbsp;/gi, ' ')      // replace nbsp entities
+    .replace(/\s+/g, ' ')         // collapse whitespace
+    .trim();
+};
+
 export const productValidationSchema = Yup.object({
   name: Yup.string()
     .required('Product name is required')
@@ -27,14 +37,22 @@ export const productValidationSchema = Yup.object({
     .url('Please enter a valid URL'),
   
   description: Yup.string()
-  .trim() // removes leading/trailing spaces before validation
-  .required('Description is required')
-  .test(
-    "not-only-spaces",
-    "Description cannot be only spaces",
-    (value) => value && value.trim().length > 0
-  )
-  .min(10, 'Description must be at least 10 characters')
-  .max(500, 'Description must be less than 500 characters'),
+    .required('Description is required')
+    .test(
+      'not-empty-after-strip',
+      'Description cannot be only spaces',
+      (value) => extractPlainText(value).length > 0
+    )
+    .test(
+      'min-plain-text',
+      'Description must be at least 10 characters',
+      (value) => extractPlainText(value).length >= 10
+    )
+    .test(
+      'max-plain-text',
+      'Description must be less than 500 characters',
+      (value) => extractPlainText(value).length <= 500
+    )
+  
 
 });
