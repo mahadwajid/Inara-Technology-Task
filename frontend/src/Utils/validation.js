@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 
-// Extract plain text from potential HTML (e.g., from ReactQuill) and collapse whitespace
+
 const extractPlainText = (value) => {
   if (typeof value !== 'string') return '';
   return value
-    .replace(/<[^>]*>/g, ' ')      // remove HTML tags
-    .replace(/&nbsp;/gi, ' ')      // replace nbsp entities
-    .replace(/\s+/g, ' ')         // collapse whitespace
+    .replace(/<[^>]*>/g, ' ')     
+    .replace(/&nbsp;/gi, ' ')      
+    .replace(/\s+/g, ' ')         
     .trim();
 };
 
